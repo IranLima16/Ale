@@ -69,10 +69,13 @@ no site, você edita os dados — nunca precisa editar HTML/componentes.
 - **Página própria por camisa** (em vez de modal). Assim cada camisa tem uma
   URL única, que pode ser compartilhada isoladamente no WhatsApp com a
   imagem e o preço certos.
-- **Imagens placeholder geradas localmente** com o script
+- **Imagens placeholder 100% originais**, geradas localmente pelo script
   `scripts/generate-placeholders.mjs` (usa a biblioteca `sharp` apenas em
   modo desenvolvimento, para desenhar as imagens — isso não afeta o site
-  publicado). Nenhuma imagem de terceiros ou logo oficial foi usada.
+  publicado). Os produtos usam uma ilustração genérica de camisa (silhueta
+  própria, nas cores tradicionais de cada clube) e os times um selo com
+  iniciais — nenhum escudo oficial, logotipo ou foto de terceiros é usado em
+  nenhum lugar do projeto.
 - **Nenhum campo de tamanho, estoque ou disponibilidade existe no projeto**
   — nem escondido. Isso foi removido do modelo de dados de propósito, para
   garantir que nunca apareça por engano.
