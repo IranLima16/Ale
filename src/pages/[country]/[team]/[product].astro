@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import ImageGallery from "../../../components/ImageGallery";
+import WhatsAppButton from "../../../components/WhatsAppButton.astro";
+import {
+  getAllProducts,
+  getTeamById,
+  getCountryById,
+  getCategoryById,
+  getCountryPath,
+  getTeamPath,
+} from "../../../lib/catalog";
+import { formatPrice } from "../../../lib/format";
+import { getProductWhatsAppLink } from "../../../lib/whatsapp";
+
+export function getStaticPaths() {
+  return getAllProducts()
+    .map((product) => {
+      const team = getTeamById(product.teamId);
+      const country = getCountryById(product.countryId);
+      if (!team || !country) return null;
+      return {
+        params: { country: country.slug, team: team.slug, product: product.slug },
+        props: { product, team, country },
+      };
+    })
+    .filter((entry): entry is NonNullable<typeof entry> => entry !== null);
+}
+
+const { product, team, country } = Astro.props;
+const category = getCategoryById(product.categoryId);
+const images = [product.mainImage, ...(product.additionalImages ?? [])];
+const hasPromo = typeof product.promoPrice === "number";
+const whatsappHref = getProductWhatsAppLink(product, team);
+---
+
+<BaseLayout
+  title={`${product.name} · ${team.name}`}
+  description={product.shortDescription}
+  image={product.mainImage}
+>
+  <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+    <Breadcrumbs
+      items={[
+        { label: country.name, href: getCountryPath(country) },
+        { label: team.name, href: getTeamPath(team) },
+        { label: product.name },
+      ]}
+    />
+
+    <div class="grid gap-8 md:grid-cols-2">
+      <ImageGallery client:visible images={images} productName={product.name} />
+
+      <div class="flex flex-col gap-4">
+        <div>
+          <a href={getTeamPath(team)} class="text-sm font-medium text-brand-700 hover:underline">
+            {team.name}
+          </a>
+          <h1 class="mt-1 text-2xl font-extrabold text-ink-900 sm:text-3xl">{product.name}</h1>
+        </div>
+
+        <div class="flex flex-wrap gap-2 text-sm">
+          <span class="rounded-full bg-ink-100 px-3 py-1 text-ink-600">Temporada {product.season}</span>
+          {category && <span class="rounded-full bg-ink-100 px-3 py-1 text-ink-600">{category.name}</span>}
+        </div>
+
+        <div class="flex items-baseline gap-3">
+          {
+            hasPromo ? (
+              <>
+                <span class="text-3xl font-extrabold text-brand-700">{formatPrice(product.promoPrice!)}</span>
+                <span class="text-lg text-ink-400 line-through">{formatPrice(product.price)}</span>
+              </>
+            ) : (
+              <span class="text-3xl font-extrabold text-ink-900">{formatPrice(product.price)}</span>
+            )
+          }
+        </div>
+
+        <p class="leading-relaxed text-ink-600">{product.shortDescription}</p>
+
+        <div class="mt-2">
+          <WhatsAppButton href={whatsappHref} label="Tenho interesse, falar no WhatsApp" size="lg" class="w-full sm:w-auto" />
+          <p class="mt-2 text-xs text-ink-400">
+            Tamanhos e disponibilidade são confirmados diretamente com o vendedor pelo WhatsApp.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

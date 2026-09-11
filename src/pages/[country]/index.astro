@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import EmptyState from "../../components/EmptyState.astro";
+import TeamCard from "../../components/TeamCard";
+import { getActiveCountries, getTeamsByCountryId, getTeamPath, getProductsByTeamId } from "../../lib/catalog";
+
+export function getStaticPaths() {
+  return getActiveCountries().map((country) => ({
+    params: { country: country.slug },
+    props: { country },
+  }));
+}
+
+const { country } = Astro.props;
+const teams = getTeamsByCountryId(country.id);
+---
+
+<BaseLayout
+  title={country.name}
+  description={`Times de ${country.name} disponíveis no catálogo. Escolha um time para ver as camisas.`}
+  image={country.flagImage}
+>
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <Breadcrumbs items={[{ label: country.name }]} />
+    <h1 class="text-2xl font-extrabold text-ink-900 sm:text-3xl">{country.name}</h1>
+    <p class="mt-1 text-ink-500">
+      {teams.length === 0 ? "Times em breve." : `${teams.length} ${teams.length === 1 ? "time" : "times"} no catálogo`}
+    </p>
+
+    <div class="mt-6">
+      {
+        teams.length === 0 ? (
+          <EmptyState
+            title="Nenhum time cadastrado ainda neste país"
+            description="Volte em breve ou fale com a gente pelo WhatsApp para saber mais."
+          />
+        ) : (
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {teams.map((team) => (
+              <TeamCard team={team} href={getTeamPath(team)} productCount={getProductsByTeamId(team.id).length} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>

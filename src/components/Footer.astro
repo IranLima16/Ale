@@ -1,0 +1,38 @@
+---
+import { siteConfig } from "../config/site";
+import { getGeneralWhatsAppLink } from "../lib/whatsapp";
+
+const whatsappHref = getGeneralWhatsAppLink();
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 border-t border-ink-200 bg-ink-900 text-ink-200">
+  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
+    <div class="flex flex-col gap-2">
+      <span class="text-lg font-bold text-white">{siteConfig.name}</span>
+      <p class="max-w-xl text-sm text-ink-400">{siteConfig.footerText}</p>
+    </div>
+
+    <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+      <a href={whatsappHref} target="_blank" rel="noopener noreferrer" class="hover:text-white">
+        WhatsApp
+      </a>
+      {
+        siteConfig.social.instagram && (
+          <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="hover:text-white">
+            Instagram
+          </a>
+        )
+      }
+      {
+        siteConfig.contact.email && (
+          <a href={`mailto:${siteConfig.contact.email}`} class="hover:text-white">
+            {siteConfig.contact.email}
+          </a>
+        )
+      }
+    </div>
+
+    <p class="text-xs text-ink-500">© {year} {siteConfig.name}. Catálogo digital — compra e disponibilidade confirmadas via WhatsApp.</p>
+  </div>
+</footer>

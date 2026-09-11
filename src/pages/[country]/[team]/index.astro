@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import EmptyState from "../../../components/EmptyState.astro";
+import CategoryFilterGrid from "../../../components/CategoryFilterGrid";
+import {
+  getActiveCountries,
+  getAllActiveTeams,
+  getCategoriesForTeam,
+  getProductsByTeamId,
+  getCountryPath,
+  getProductPath,
+} from "../../../lib/catalog";
+
+export function getStaticPaths() {
+  const countries = getActiveCountries();
+  return getAllActiveTeams()
+    .map((team) => {
+      const country = countries.find((c) => c.id === team.countryId);
+      if (!country) return null;
+      return {
+        params: { country: country.slug, team: team.slug },
+        props: { team, country },
+      };
+    })
+    .filter((entry): entry is NonNullable<typeof entry> => entry !== null);
+}
+
+const { team, country } = Astro.props;
+const products = getProductsByTeamId(team.id);
+const categories = getCategoriesForTeam(team.id);
+const items = products.map((product) => ({ product, href: getProductPath(product) }));
+---
+
+<BaseLayout
+  title={team.name}
+  description={`Camisas do ${team.name} disponíveis no catálogo. Veja fotos, preços e fale pelo WhatsApp.`}
+  image={team.coverImage ?? team.logo}
+>
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <Breadcrumbs
+      items={[
+        { label: country.name, href: getCountryPath(country) },
+        { label: team.name },
+      ]}
+    />
+
+    <div class="flex items-center gap-4">
+      <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-ink-900">
+        <img src={team.logo} alt={`Escudo do ${team.name}`} width={64} height={64} class="h-full w-full object-cover" />
+      </div>
+      <div>
+        <h1 class="text-2xl font-extrabold text-ink-900 sm:text-3xl">{team.name}</h1>
+        <p class="text-ink-500">
+          {products.length === 0 ? "Camisas em breve." : `${products.length} ${products.length === 1 ? "camisa" : "camisas"} no catálogo`}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      {
+        products.length === 0 ? (
+          <EmptyState
+            title="Nenhuma camisa cadastrada ainda para este time"
+            description="Volte em breve ou fale com a gente pelo WhatsApp para saber mais."
+          />
+        ) : (
+          <CategoryFilterGrid client:load items={items} categories={categories} />
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>
