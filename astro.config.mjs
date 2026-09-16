@@ -10,7 +10,7 @@ export default defineConfig({
   // IMPORTANTE: atualize para a URL final publicada no Cloudflare Pages
   // (ou seu domínio próprio). Usado para sitemap.xml, robots.txt e URLs
   // absolutas de compartilhamento (Open Graph / WhatsApp).
-  site: 'https://seu-catalogo.pages.dev',
+  site: 'https://ale.irandelima96.workers.dev',
 
   integrations: [react(), sitemap()],
 

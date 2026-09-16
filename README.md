@@ -263,23 +263,35 @@ git push -u origin main
 
 ## 11. Como publicar no Cloudflare Pages
 
-1. Acesse [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers &
-   Pages** → **Create application** → **Pages** → **Connect to Git**.
-2. Selecione o repositório que você acabou de subir no GitHub.
-3. Configure o build:
-   - **Framework preset:** Astro
+> **Já publicado:** este projeto está no ar em
+> **https://ale.irandelima96.workers.dev**, conectado ao repositório
+> `IranLima16/Ale`. Os passos abaixo são para referência ou caso precise
+> recriar o projeto do zero.
+
+O painel atual do Cloudflare usa um fluxo unificado ("Workers Builds") em vez
+da antiga tela separada de "Pages":
+
+1. Acesse [dash.cloudflare.com](https://dash.cloudflare.com) → **Compute** →
+   **Workers & Pages** → **Create application** (ou o atalho "Create app" na
+   home) → **Connect GitHub**.
+2. Autorize o GitHub e selecione o repositório do catálogo.
+3. Na configuração, confirme:
    - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-4. Em **Environment variables**, adicione `NODE_VERSION` = `22` (garante uma
-   versão do Node compatível com o projeto).
-5. Clique em **Save and Deploy**. Em poucos minutos você recebe uma URL
-   pública do tipo `https://seu-projeto.pages.dev`.
-6. **Importante:** depois de publicar, atualize a URL final em dois lugares
+   - **Deploy command:** `npx wrangler deploy`
+4. Clique em **Deploy**. Em poucos minutos você recebe uma URL pública do
+   tipo `https://seu-projeto.SEU-USUARIO.workers.dev`.
+5. **Importante:** depois de publicar, atualize a URL final em dois lugares
    — `site` em [`astro.config.mjs`](astro.config.mjs) e `url` em
    [`src/config/site.ts`](src/config/site.ts) — e suba um novo commit. Isso
    corrige o sitemap, o `robots.txt` e as imagens de compartilhamento (Open
    Graph) usadas pelo preview do link no WhatsApp.
-7. (Opcional) Em **Custom domains**, conecte um domínio próprio.
+6. (Opcional) Em **Domains**, conecte um domínio próprio.
+
+Esse fluxo publica o site como um **Worker de assets estáticos**, controlado
+pelo arquivo [`wrangler.jsonc`](wrangler.jsonc) na raiz do projeto — é ele
+que informa ao Cloudflare que a pasta `dist/` (gerada pelo `npm run build`)
+deve ser servida como o site. Se você recriar o projeto do zero, mantenha
+esse arquivo; sem ele o comando `wrangler deploy` não sabe o que publicar.
 
 ---
 
