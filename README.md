@@ -264,7 +264,7 @@ git push -u origin main
 ## 11. Como publicar no Cloudflare Pages
 
 > **Já publicado:** este projeto está no ar em
-> **https://ale.irandelima96.workers.dev**, conectado ao repositório
+> **https://catalogo.irandelima96.workers.dev**, conectado ao repositório
 > `IranLima16/Ale`. Os passos abaixo são para referência ou caso precise
 > recriar o projeto do zero.
 

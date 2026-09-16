@@ -24,7 +24,7 @@ export const siteConfig = {
    * (ex: "https://catalogo-de-camisas.pages.dev" ou seu domínio próprio).
    * É usado para gerar sitemap.xml, robots.txt e tags de compartilhamento (Open Graph).
    */
-  url: "https://ale.irandelima96.workers.dev",
+  url: "https://catalogo.irandelima96.workers.dev",
 
   /**
    * Caminho de uma imagem de logo (ex: "/logo.svg"), se você tiver uma.
