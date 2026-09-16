@@ -26,7 +26,9 @@ export default function CountryCard({ country, href, teamCount }: Props) {
         )}
       </div>
       <div className="flex flex-col gap-0.5 p-3">
-        <h3 className="font-semibold text-ink-900 group-hover:text-brand-700">{country.name}</h3>
+        <h3 className="font-display text-base font-bold uppercase tracking-tight text-ink-900 group-hover:text-brand-700">
+          {country.name}
+        </h3>
         {typeof teamCount === "number" && (
           <span className="text-xs text-ink-500">
             {teamCount === 0

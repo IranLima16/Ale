@@ -50,7 +50,7 @@ const items = products.map((product) => ({ product, href: getProductPath(product
         <img src={team.logo} alt={`Escudo do ${team.name}`} width={64} height={64} class="h-full w-full object-cover" />
       </div>
       <div>
-        <h1 class="text-2xl font-extrabold text-ink-900 sm:text-3xl">{team.name}</h1>
+        <h1 class="font-display text-3xl font-extrabold uppercase tracking-tight text-ink-900 sm:text-4xl">{team.name}</h1>
         <p class="text-ink-500">
           {products.length === 0 ? "Camisas em breve." : `${products.length} ${products.length === 1 ? "camisa" : "camisas"} no catálogo`}
         </p>

@@ -9,7 +9,7 @@ interface Props {
 
 const { href, label, size = "md", variant = "solid", class: className = "" } = Astro.props;
 
-const sizeClasses = size === "lg" ? "px-6 py-4 text-base" : "px-4 py-2.5 text-sm";
+const sizeClasses = size === "lg" ? "min-h-12 px-6 text-base" : "min-h-11 px-4 text-sm";
 const variantClasses =
   variant === "solid"
     ? "bg-brand-600 text-white hover:bg-brand-700"

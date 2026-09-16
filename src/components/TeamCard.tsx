@@ -24,7 +24,9 @@ export default function TeamCard({ team, href, productCount }: Props) {
         />
       </div>
       <div className="flex flex-1 flex-col">
-        <h3 className="font-semibold leading-snug text-ink-900 group-hover:text-brand-700">{team.name}</h3>
+        <h3 className="font-display text-lg font-bold uppercase leading-snug tracking-tight text-ink-900 group-hover:text-brand-700">
+          {team.name}
+        </h3>
         {typeof productCount === "number" && (
           <span className="text-sm text-ink-500">
             {productCount} {productCount === 1 ? "camisa" : "camisas"} no catálogo

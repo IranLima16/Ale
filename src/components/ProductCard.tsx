@@ -26,10 +26,16 @@ export default function ProductCard({ product, href, teamName }: Props) {
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        {hasPromo && (
+        {hasPromo ? (
           <span className="absolute left-3 top-3 rounded-full bg-brand-600 px-2.5 py-1 text-xs font-semibold text-white shadow-sm">
             Promoção
           </span>
+        ) : (
+          product.featured && (
+            <span className="absolute left-3 top-3 rounded-full bg-gold-500 px-2.5 py-1 text-xs font-semibold text-white shadow-sm">
+              Destaque
+            </span>
+          )
         )}
       </div>
 
@@ -40,14 +46,14 @@ export default function ProductCard({ product, href, teamName }: Props) {
         <h3 className="font-semibold leading-snug text-ink-900">{product.name}</h3>
         <span className="text-sm text-ink-500">Temporada {product.season}</span>
 
-        <div className="mt-2 flex items-baseline gap-2">
+        <div className="mt-2 flex items-baseline gap-2 font-display">
           {hasPromo ? (
             <>
-              <span className="text-lg font-bold text-brand-700">{formatPrice(product.promoPrice!)}</span>
-              <span className="text-sm text-ink-400 line-through">{formatPrice(product.price)}</span>
+              <span className="text-xl font-bold text-brand-700">{formatPrice(product.promoPrice!)}</span>
+              <span className="text-base text-ink-400 line-through">{formatPrice(product.price)}</span>
             </>
           ) : (
-            <span className="text-lg font-bold text-ink-900">{formatPrice(product.price)}</span>
+            <span className="text-xl font-bold text-ink-900">{formatPrice(product.price)}</span>
           )}
         </div>
       </div>

@@ -57,23 +57,25 @@ const whatsappHref = getProductWhatsAppLink(product, team);
           <a href={getTeamPath(team)} class="text-sm font-medium text-brand-700 hover:underline">
             {team.name}
           </a>
-          <h1 class="mt-1 text-2xl font-extrabold text-ink-900 sm:text-3xl">{product.name}</h1>
+          <h1 class="mt-1 font-display text-3xl font-extrabold uppercase leading-tight tracking-tight text-ink-900 sm:text-4xl">
+            {product.name}
+          </h1>
         </div>
 
         <div class="flex flex-wrap gap-2 text-sm">
           <span class="rounded-full bg-ink-100 px-3 py-1 text-ink-600">Temporada {product.season}</span>
-          {category && <span class="rounded-full bg-ink-100 px-3 py-1 text-ink-600">{category.name}</span>}
+          {category && <span class="rounded-full bg-gold-100 px-3 py-1 font-medium text-gold-700">{category.name}</span>}
         </div>
 
-        <div class="flex items-baseline gap-3">
+        <div class="flex items-baseline gap-3 font-display">
           {
             hasPromo ? (
               <>
-                <span class="text-3xl font-extrabold text-brand-700">{formatPrice(product.promoPrice!)}</span>
-                <span class="text-lg text-ink-400 line-through">{formatPrice(product.price)}</span>
+                <span class="text-4xl font-extrabold text-brand-700">{formatPrice(product.promoPrice!)}</span>
+                <span class="text-xl text-ink-400 line-through">{formatPrice(product.price)}</span>
               </>
             ) : (
-              <span class="text-3xl font-extrabold text-ink-900">{formatPrice(product.price)}</span>
+              <span class="text-4xl font-extrabold text-ink-900">{formatPrice(product.price)}</span>
             )
           }
         </div>

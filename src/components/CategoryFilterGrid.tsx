@@ -57,7 +57,7 @@ function FilterPill({ label, isActive, onClick }: { label: string; isActive: boo
     <button
       type="button"
       onClick={onClick}
-      className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-150 ${
+      className={`inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 text-sm font-medium transition-colors duration-150 ${
         isActive
           ? "border-brand-600 bg-brand-600 text-white"
           : "border-ink-200 bg-white text-ink-600 hover:border-brand-300 hover:text-brand-700"
