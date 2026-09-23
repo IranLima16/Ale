@@ -8,8 +8,10 @@ import type { Team } from "./types";
  */
 export const teams: Team[] = [
   // França
-  { id: "psg", name: "Paris Saint-Germain", slug: "psg", countryId: "franca", logo: "/teams/psg.png", order: 1, active: true, featured: true },
-  { id: "marseille", name: "Olympique de Marseille", slug: "marseille", countryId: "franca", logo: "/teams/marseille.png", order: 2, active: true },
+  { id: "selecao-franca", name: "Seleção da França", slug: "selecao-franca", countryId: "franca", logo: "/teams/selecao-franca.png", order: 1, active: true, featured: true },
+  { id: "psg", name: "Paris Saint-Germain", slug: "psg", countryId: "franca", logo: "/teams/psg.png", order: 2, active: true, featured: true },
+  { id: "marseille", name: "Olympique de Marseille", slug: "marseille", countryId: "franca", logo: "/teams/marseille.png", order: 3, active: true },
+  { id: "lyon", name: "Olympique Lyonnais", slug: "lyon", countryId: "franca", logo: "/teams/lyon.png", order: 4, active: true },
 
   // Espanha
   { id: "barcelona", name: "Barcelona", slug: "barcelona", countryId: "espanha", logo: "/teams/barcelona.png", order: 1, active: true, featured: true },

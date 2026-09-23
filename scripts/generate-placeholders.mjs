@@ -115,7 +115,7 @@ function jerseyGroup({ primary, secondary, stripe, flip }) {
 
   return `
   <g transform="${flip ? "translate(300,0) scale(-1,1)" : ""}">
-    <path d="${JERSEY_PATH}" fill="${primary}" stroke="rgba(15,23,42,0.18)" stroke-width="3"/>
+    <path d="${JERSEY_PATH}" fill="${primary}" stroke="rgba(255,255,255,0.16)" stroke-width="3"/>
     ${chestStripe}
     ${collar}
     ${cuffLeft}
@@ -131,20 +131,28 @@ async function makeProductPhoto({ primary, secondary, stripe = false, angle = "f
   const tx = (width - jw * scale) / 2;
   const ty = angle === "detail" ? height * 0.05 : height * 0.1;
 
+  // Estúdio escuro (spotlight) — inspirado em fotografia de lançamento de
+  // camisas de marcas esportivas premium, para casar com o tema dark do site.
   const svg = `
 <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="studio" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f8fafc"/>
-      <stop offset="100%" stop-color="#e2e8f0"/>
-    </linearGradient>
+    <radialGradient id="spotlight" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#1b2333"/>
+      <stop offset="55%" stop-color="#0f1420"/>
+      <stop offset="100%" stop-color="#05070c"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="${secondary}" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="${secondary}" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="${width}" height="${height}" fill="url(#studio)"/>
-  <ellipse cx="${width / 2}" cy="${height * 0.86}" rx="${width * 0.28}" ry="${height * 0.032}" fill="rgba(15,23,42,0.12)"/>
+  <rect width="${width}" height="${height}" fill="url(#spotlight)"/>
+  <ellipse cx="${width / 2}" cy="${height * 0.52}" rx="${width * 0.55}" ry="${height * 0.32}" fill="url(#glow)"/>
+  <ellipse cx="${width / 2}" cy="${height * 0.86}" rx="${width * 0.26}" ry="${height * 0.026}" fill="rgba(0,0,0,0.55)"/>
   <g transform="translate(${tx}, ${ty}) scale(${scale})">
     ${jerseyGroup({ primary, secondary, stripe, flip: angle === "back" })}
   </g>
-  <text x="16" y="${height - 16}" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="rgba(15,23,42,0.4)">${escapeXml(caption)}</text>
+  <text x="16" y="${height - 16}" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="rgba(255,255,255,0.32)">${escapeXml(caption)}</text>
 </svg>`;
   await writePng(svg, outPath);
 }
@@ -155,8 +163,10 @@ async function makeProductPhoto({ primary, secondary, stripe = false, angle = "f
 // ou logotipo é desenhado.
 // ---------------------------------------------------------------------------
 const TEAM_COLORS = {
+  "selecao-franca": { primary: "#1c3f94", secondary: "#ed2939" },
   psg: { primary: "#0a1e42", secondary: "#e0132a" },
   marseille: { primary: "#2fa8e0", secondary: "#0c3b6e" },
+  lyon: { primary: "#ffffff", secondary: "#0b3d91" },
   barcelona: { primary: "#a1053e", secondary: "#0a4694" },
   "real-madrid": { primary: "#ffffff", secondary: "#f2b90c" },
   "manchester-city": { primary: "#6cabdd", secondary: "#132257" },
@@ -172,6 +182,12 @@ function variantColors(base, kind) {
   if (kind === "third") {
     return { primary: "#111827", secondary, stripe: false };
   }
+  if (kind === "fourth") {
+    return { primary: "#e5e7eb", secondary, stripe: true };
+  }
+  if (kind === "training") {
+    return { primary: "#6b7280", secondary, stripe: false };
+  }
   if (kind === "retro") {
     return { primary: secondary, secondary: primary, stripe: true };
   }
@@ -180,8 +196,10 @@ function variantColors(base, kind) {
 
 function detectKind(relPath) {
   if (relPath.includes("away")) return "away";
+  if (relPath.includes("fourth")) return "fourth";
   if (relPath.includes("third")) return "third";
   if (relPath.includes("retro")) return "retro";
+  if (relPath.includes("treino") || relPath.includes("kit-") || relPath.includes("shorts") || relPath.includes("pre-jogo")) return "training";
   return "home";
 }
 
@@ -198,8 +216,10 @@ const COUNTRY_TILES = [
 ];
 
 const TEAM_BADGES = [
+  ["FRA", "selecao-franca"],
   ["PSG", "psg"],
   ["OM", "marseille"],
+  ["OL", "lyon"],
   ["BAR", "barcelona"],
   ["RMA", "real-madrid"],
   ["MCI", "manchester-city"],
@@ -209,15 +229,38 @@ const TEAM_BADGES = [
 
 // [time, temporada/rótulo, caminho, ângulo]
 const PRODUCT_IMAGES = [
+  ["selecao-franca", "2025/26", "products/selecao-franca/home-25-26-1.png", "front"],
+  ["selecao-franca", "2026/27", "products/selecao-franca/home-26-27-1.png", "front"],
+  ["selecao-franca", "2026/27", "products/selecao-franca/away-26-27-1.png", "front"],
+  ["selecao-franca", "treino", "products/selecao-franca/kit-treino-1.png", "front"],
+  ["selecao-franca", "treino", "products/selecao-franca/kit-treino-alt-1.png", "front"],
+
   ["psg", "2025/26", "products/psg/home-25-26-1.png", "front"],
   ["psg", "verso", "products/psg/home-25-26-2.png", "back"],
   ["psg", "detalhe", "products/psg/home-25-26-3.png", "detail"],
   ["psg", "2025/26", "products/psg/away-25-26-1.png", "front"],
   ["psg", "1994", "products/psg/retro-1994-1.png", "front"],
+  ["psg", "2025/26", "products/psg/third-25-26-1.png", "front"],
+  ["psg", "2025/26", "products/psg/fourth-25-26-1.png", "front"],
+  ["psg", "pré-jogo", "products/psg/pre-jogo-25-26-1.png", "front"],
+  ["psg", "2026/27", "products/psg/home-26-27-1.png", "front"],
+  ["psg", "2026/27", "products/psg/away-26-27-1.png", "front"],
+  ["psg", "2026/27", "products/psg/third-26-27-1.png", "front"],
+  ["psg", "jogador", "products/psg/jogador-home-25-26-1.png", "front"],
+  ["psg", "infantil", "products/psg/infantil-home-25-26-1.png", "front"],
+  ["psg", "treino", "products/psg/kit-treino-1.png", "front"],
+  ["psg", "treino", "products/psg/kit-treino-away-1.png", "front"],
+  ["psg", "2010", "products/psg/retro-2010-1.png", "front"],
+  ["psg", "feminina", "products/psg/feminina-home-25-26-1.png", "front"],
+  ["psg", "shorts", "products/psg/shorts-treino-1.png", "front"],
 
   ["marseille", "2025/26", "products/marseille/home-25-26-1.png", "front"],
   ["marseille", "2025/26", "products/marseille/away-25-26-1.png", "front"],
   ["marseille", "2025/26", "products/marseille/third-25-26-1.png", "front"],
+  ["marseille", "treino", "products/marseille/kit-treino-1.png", "front"],
+  ["marseille", "jogador", "products/marseille/jogador-home-25-26-1.png", "front"],
+
+  ["lyon", "pré-jogo", "products/lyon/pre-jogo-25-26-1.png", "front"],
 
   ["barcelona", "2025/26", "products/barcelona/home-25-26-1.png", "front"],
   ["barcelona", "verso", "products/barcelona/home-25-26-2.png", "back"],
