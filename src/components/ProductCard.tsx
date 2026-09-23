@@ -14,7 +14,7 @@ export default function ProductCard({ product, href, teamName }: Props) {
   return (
     <a
       href={href}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink-900/5 focus-visible:-translate-y-0.5"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink-900/5 focus-visible:-translate-y-0.5"
     >
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-100">
         <img

@@ -10,7 +10,7 @@ export default function TeamCard({ team, href, productCount }: Props) {
   return (
     <a
       href={href}
-      className="group flex items-center gap-4 rounded-2xl border border-ink-200 bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink-900/5 focus-visible:-translate-y-0.5"
+      className="group flex items-center gap-4 rounded-2xl border border-ink-200 bg-white p-4 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink-900/5 focus-visible:-translate-y-0.5"
     >
       <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-ink-900">
         <img

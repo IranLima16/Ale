@@ -10,7 +10,7 @@ export default function CountryCard({ country, href, teamCount }: Props) {
   return (
     <a
       href={href}
-      className="group flex shrink-0 flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink-900/5 focus-visible:-translate-y-0.5"
+      className="group flex shrink-0 flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink-900/5 focus-visible:-translate-y-0.5"
     >
       <div className="relative aspect-[3/2] w-full overflow-hidden bg-ink-900">
         {country.flagImage && (

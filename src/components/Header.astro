@@ -14,7 +14,7 @@ const whatsappHref = getGeneralWhatsAppLink();
       <a href="/" class="flex shrink-0 items-center gap-2 font-bold text-ink-900">
         {
           siteConfig.logoImage ? (
-            <img src={siteConfig.logoImage} alt={siteConfig.name} class="h-8 w-auto" />
+            <img src={siteConfig.logoImage} alt={siteConfig.name} width="160" height="32" class="h-8 w-auto" />
           ) : (
             <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-ink-900 text-sm font-extrabold text-white">
               {siteConfig.name
@@ -32,6 +32,7 @@ const whatsappHref = getGeneralWhatsAppLink();
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Falar no WhatsApp"
         class="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-brand-600 px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
       >
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">

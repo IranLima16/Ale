@@ -42,6 +42,8 @@ export default function SearchBar({ index }: Props) {
         </svg>
         <input
           type="search"
+          name="q"
+          autoComplete="off"
           value={query}
           onChange={(event) => {
             setQuery(event.target.value);
@@ -52,7 +54,7 @@ export default function SearchBar({ index }: Props) {
             if (event.key === "Enter") goToSearchPage();
             if (event.key === "Escape") setOpen(false);
           }}
-          placeholder="Buscar por time, país, camisa..."
+          placeholder="Buscar por time, país, camisa…"
           aria-label="Buscar no catálogo"
           className="w-full bg-transparent text-sm text-ink-900 outline-none placeholder:text-ink-400"
         />
