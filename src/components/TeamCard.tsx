@@ -10,9 +10,9 @@ export default function TeamCard({ team, href, productCount }: Props) {
   return (
     <a
       href={href}
-      className="group flex items-center gap-4 rounded-2xl border border-ink-200 bg-white p-4 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink-900/5 focus-visible:-translate-y-0.5"
+      className="group flex items-center gap-4 rounded-2xl border border-white/8 bg-surface-1 p-4 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-white/15 hover:shadow-xl hover:shadow-black/40 focus-visible:-translate-y-0.5"
     >
-      <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-ink-900">
+      <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-surface-2 ring-1 ring-inset ring-white/10">
         <img
           src={team.logo}
           alt={`Escudo do ${team.name}`}
@@ -24,16 +24,16 @@ export default function TeamCard({ team, href, productCount }: Props) {
         />
       </div>
       <div className="flex flex-1 flex-col">
-        <h3 className="font-display text-lg font-bold uppercase leading-snug tracking-tight text-ink-900 group-hover:text-brand-700">
+        <h3 className="font-display text-lg font-bold uppercase leading-snug tracking-tight text-white group-hover:text-brand-400">
           {team.name}
         </h3>
         {typeof productCount === "number" && (
-          <span className="text-sm text-ink-500">
+          <span className="text-sm text-ink-400">
             {productCount} {productCount === 1 ? "camisa" : "camisas"} no catálogo
           </span>
         )}
       </div>
-      <span aria-hidden="true" className="text-ink-300 transition-transform group-hover:translate-x-1">
+      <span aria-hidden="true" className="text-ink-500 transition-transform group-hover:translate-x-1 group-hover:text-brand-400">
         →
       </span>
     </a>

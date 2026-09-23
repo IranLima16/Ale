@@ -24,32 +24,44 @@ const whatsappHref = getGeneralWhatsAppLink();
 ---
 
 <BaseLayout title={siteConfig.name} description={siteConfig.description}>
-  <section class="relative overflow-hidden bg-ink-900 text-white">
+  <section class="stadium-texture relative overflow-hidden border-b border-white/8">
     <div
       aria-hidden="true"
-      class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rotate-12 bg-gradient-to-br from-brand-500/25 to-transparent sm:h-96 sm:w-96"
+      class="pointer-events-none absolute inset-0"
+      style="background: radial-gradient(60% 55% at 50% 0%, rgba(34,197,94,0.16), transparent 70%);"
+    >
+    </div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rotate-12 bg-gradient-to-br from-brand-500/20 to-transparent sm:h-[28rem] sm:w-[28rem]"
       style="clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 70%);"
     >
     </div>
     <div
       aria-hidden="true"
-      class="pointer-events-none absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-brand-500 via-gold-400 to-brand-500"
+      class="pointer-events-none absolute -left-32 bottom-0 h-64 w-64 rounded-full bg-gold-500/10 blur-3xl"
     >
     </div>
-    <div class="relative mx-auto flex max-w-6xl flex-col gap-6 px-4 py-14 sm:px-6 sm:py-20">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-brand-500 via-gold-400 to-brand-500"
+    >
+    </div>
+
+    <div class="relative mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 sm:px-6 sm:py-24">
       <div class="max-w-2xl animate-fade-up">
-        <span class="inline-flex items-center gap-2 rounded-full bg-gold-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold-300">
+        <span class="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-gold-300">
           Catálogo digital
         </span>
-        <h1 class="mt-4 font-display text-4xl font-extrabold uppercase leading-none tracking-tight sm:text-6xl">
+        <h1 class="mt-5 font-display text-5xl font-extrabold uppercase leading-[0.95] tracking-tight text-white sm:text-7xl">
           {siteConfig.name}
         </h1>
-        <p class="mt-3 text-base text-ink-300 sm:text-lg">{siteConfig.tagline}</p>
+        <p class="mt-4 max-w-xl text-base text-ink-300 sm:text-lg">{siteConfig.tagline}</p>
       </div>
       <div class="flex flex-wrap gap-3 animate-fade-up" style="animation-delay: 0.1s;">
         <a
           href="#paises"
-          class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/20 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+          class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white/10"
         >
           Ver países
         </a>
@@ -58,13 +70,13 @@ const whatsappHref = getGeneralWhatsAppLink();
     </div>
   </section>
 
-  <section id="paises" class="mx-auto max-w-6xl scroll-mt-32 px-4 py-10 sm:px-6">
-    <h2 class="flex items-center gap-2 font-display text-2xl font-bold uppercase tracking-tight text-ink-900 sm:text-3xl">
-      <span class="h-5 w-1.5 shrink-0 rounded-full bg-brand-600"></span>
+  <section id="paises" class="mx-auto max-w-6xl scroll-mt-32 px-4 py-14 sm:px-6 sm:py-20">
+    <h2 class="flex items-center gap-2.5 font-display text-2xl font-bold uppercase tracking-tight text-white sm:text-3xl">
+      <span class="h-5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>
       Navegue por país
     </h2>
-    <p class="mt-1 text-sm text-ink-500">Escolha um país para ver os times disponíveis.</p>
-    <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    <p class="mt-1.5 text-sm text-ink-400">Escolha um país para ver os times disponíveis.</p>
+    <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {
         countries.map((country) => (
           <CountryCard
@@ -79,20 +91,18 @@ const whatsappHref = getGeneralWhatsAppLink();
 
   {
     featuredTeams.length > 0 && (
-      <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <h2 class="flex items-center gap-2 font-display text-2xl font-bold uppercase tracking-tight text-ink-900 sm:text-3xl">
-          <span class="h-5 w-1.5 shrink-0 rounded-full bg-gold-500"></span>
-          Times em destaque
-        </h2>
-        <div class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredTeams.map((team) => {
-            const resolvedTeam = getTeamById(team.id);
-            return (
-              resolvedTeam && (
-                <TeamCard team={resolvedTeam} href={getTeamPath(resolvedTeam)} />
-              )
-            );
-          })}
+      <section class="border-t border-white/8">
+        <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+          <h2 class="flex items-center gap-2.5 font-display text-2xl font-bold uppercase tracking-tight text-white sm:text-3xl">
+            <span class="h-5 w-1.5 shrink-0 rounded-full bg-gold-400"></span>
+            Times em destaque
+          </h2>
+          <div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredTeams.map((team) => {
+              const resolvedTeam = getTeamById(team.id);
+              return resolvedTeam && <TeamCard team={resolvedTeam} href={getTeamPath(resolvedTeam)} />;
+            })}
+          </div>
         </div>
       </section>
     )
@@ -100,45 +110,40 @@ const whatsappHref = getGeneralWhatsAppLink();
 
   {
     featuredProducts.length > 0 && (
-      <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <h2 class="flex items-center gap-2 font-display text-2xl font-bold uppercase tracking-tight text-ink-900 sm:text-3xl">
-          <span class="h-5 w-1.5 shrink-0 rounded-full bg-brand-600"></span>
-          Camisas em destaque
-        </h2>
-        <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {featuredProducts.map((product) => (
-            <ProductCard
-              product={product}
-              href={getProductPath(product)}
-              teamName={getTeamById(product.teamId)?.name}
-            />
-          ))}
+      <section class="border-t border-white/8">
+        <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+          <h2 class="flex items-center gap-2.5 font-display text-2xl font-bold uppercase tracking-tight text-white sm:text-3xl">
+            <span class="h-5 w-1.5 shrink-0 rounded-full bg-brand-500"></span>
+            Camisas em destaque
+          </h2>
+          <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {featuredProducts.map((product) => (
+              <ProductCard product={product} href={getProductPath(product)} teamName={getTeamById(product.teamId)?.name} />
+            ))}
+          </div>
         </div>
       </section>
     )
   }
 
-  <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
-    <div class="relative overflow-hidden rounded-3xl bg-ink-900 px-6 py-8 text-white">
-      <div
-        aria-hidden="true"
-        class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rotate-12 bg-brand-500/20"
-        style="clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 70%);"
-      >
-      </div>
-      <div class="relative flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h2 class="font-display text-2xl font-bold uppercase tracking-tight">Não encontrou a camisa que queria?</h2>
-          <p class="mt-1 text-ink-300">Fale direto com a gente pelo WhatsApp e consulte disponibilidade.</p>
-        </div>
-        <a
-          href={whatsappHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full bg-brand-500 px-6 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-brand-400"
+  <section class="border-t border-white/8">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+      <div class="stadium-texture relative overflow-hidden rounded-3xl border border-white/8 bg-surface-1 px-6 py-10 sm:px-10">
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rotate-12 bg-brand-500/15"
+          style="clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 70%);"
         >
-          Falar no WhatsApp
-        </a>
+        </div>
+        <div class="relative flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 class="font-display text-2xl font-bold uppercase tracking-tight text-white sm:text-3xl">
+              Não encontrou a camisa que queria?
+            </h2>
+            <p class="mt-1.5 text-ink-400">Fale direto com a gente pelo WhatsApp e consulte disponibilidade.</p>
+          </div>
+          <WhatsAppButton href={whatsappHref} label="Falar no WhatsApp" size="lg" class="shrink-0" />
+        </div>
       </div>
     </div>
   </section>

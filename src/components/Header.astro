@@ -8,15 +8,15 @@ const searchIndex = getSearchIndex();
 const whatsappHref = getGeneralWhatsAppLink();
 ---
 
-<header class="sticky top-0 z-30 border-b border-ink-200 bg-white/90 backdrop-blur">
+<header class="sticky top-0 z-30 border-b border-white/8 bg-surface-0/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:px-6">
     <div class="flex items-center justify-between gap-3">
-      <a href="/" class="flex shrink-0 items-center gap-2 font-bold text-ink-900">
+      <a href="/" class="flex shrink-0 items-center gap-2 font-bold text-white">
         {
           siteConfig.logoImage ? (
             <img src={siteConfig.logoImage} alt={siteConfig.name} width="160" height="32" class="h-8 w-auto" />
           ) : (
-            <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-ink-900 text-sm font-extrabold text-white">
+            <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-500 text-sm font-extrabold text-surface-0 ring-1 ring-inset ring-white/15">
               {siteConfig.name
                 .split(" ")
                 .map((w) => w[0])

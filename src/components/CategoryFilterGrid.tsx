@@ -57,9 +57,9 @@ export default function CategoryFilterGrid({ items, categories }: Props) {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-ink-300 bg-white p-8 text-center">
-          <p className="font-semibold text-ink-900">Nenhuma camisa nessa categoria</p>
-          <p className="mt-1 text-sm text-ink-500">Escolha outro filtro para ver as demais opções deste time.</p>
+        <div className="rounded-2xl border border-dashed border-white/15 bg-surface-1 p-8 text-center">
+          <p className="font-semibold text-white">Nenhuma camisa nessa categoria</p>
+          <p className="mt-1 text-sm text-ink-400">Escolha outro filtro para ver as demais opções deste time.</p>
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -79,8 +79,8 @@ function FilterPill({ label, isActive, onClick }: { label: string; isActive: boo
       onClick={onClick}
       className={`inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 text-sm font-medium transition-colors duration-150 ${
         isActive
-          ? "border-brand-600 bg-brand-600 text-white"
-          : "border-ink-200 bg-white text-ink-600 hover:border-brand-300 hover:text-brand-700"
+          ? "border-brand-500 bg-brand-500 text-surface-0"
+          : "border-white/10 bg-white/5 text-ink-300 hover:border-brand-400/50 hover:text-brand-400"
       }`}
     >
       {label}

@@ -33,7 +33,7 @@ export default function SearchResults({ index }: Props) {
           params.set("q", query);
           window.history.replaceState(null, "", `/busca?${params.toString()}`);
         }}
-        className="flex items-center gap-2 rounded-full border border-ink-200 bg-white px-4 py-2.5 shadow-sm focus-within:border-brand-500"
+        className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 focus-within:border-brand-400"
       >
 
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5 shrink-0 text-ink-400">
@@ -48,20 +48,20 @@ export default function SearchResults({ index }: Props) {
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Buscar por time, país, camisa…"
           aria-label="Buscar no catálogo"
-          className="w-full bg-transparent text-sm text-ink-900 outline-none placeholder:text-ink-400"
+          className="w-full bg-transparent text-sm text-white outline-none placeholder:text-ink-400"
         />
       </form>
 
       {query.trim().length === 0 ? (
-        <p className="text-ink-500">Digite um termo para buscar — por exemplo, o nome de um time ou país.</p>
+        <p className="text-ink-400">Digite um termo para buscar — por exemplo, o nome de um time ou país.</p>
       ) : results.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-ink-300 bg-white p-8 text-center">
-          <p className="font-semibold text-ink-900">Nenhum resultado para "{query}"</p>
-          <p className="mt-1 text-sm text-ink-500">Tente buscar por outro time, país ou temporada.</p>
+        <div className="rounded-2xl border border-dashed border-white/15 bg-surface-1 p-8 text-center">
+          <p className="font-semibold text-white">Nenhum resultado para "{query}"</p>
+          <p className="mt-1 text-sm text-ink-400">Tente buscar por outro time, país ou temporada.</p>
         </div>
       ) : (
         <>
-          <p className="text-sm text-ink-500">
+          <p className="text-sm text-ink-400">
             {results.length} {results.length === 1 ? "resultado encontrado" : "resultados encontrados"}
           </p>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
